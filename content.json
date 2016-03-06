@@ -1,10 +1,18 @@
 {
- "address": "186dimSoq8cwswwaBNKptSgC8NikcB6YmK",
- "address_index": 23086685,
+ "address": "1CjR14fofbRJ54oj8A7rAfWpzpLawdP5uc",
+ "address_index": 53380520,
  "cloneable": true,
- "cloned_from": "1AvF5TpcaamRNtqvN1cnDEWzNmUtD47Npg",
- "description": "",
+ "cloned_from": "1CjR14fofbRJ54oj8A7rAfWpzpLawdP5uc",
+ "description": "/me support",
  "files": {
+  "README.txt": {
+   "sha512": "605e1472f53d11e2b697ed8870b3d88b511ab9a5c2d207b424e4b7a16dd028fb",
+   "size": 2928
+  },
+  "ZeroChat-nofish-original.tar.gz": {
+   "sha512": "7bbc994b9722a6080edde6fc4d1ff9cd250d2fe81ca7a66d69cc1910c1120099",
+   "size": 7758
+  },
   "data-default/users/content-default.json": {
    "sha512": "e1f8d79e306fd6c8c49e0f41f546456ab1952276445d3733909c2883df6f8b0d",
    "size": 620
@@ -14,16 +22,16 @@
    "size": 485
   },
   "index.html": {
-   "sha512": "fb84d387ed80856cd40bb2acae8562b1a0a8f4691974fb6985ae18ba6a418363",
-   "size": 998
+   "sha512": "57d67110acbd069f34f9ae9dad75123981afef41be9dce1f1e03367344233dc2",
+   "size": 87372
   },
   "js/ZeroChat.coffee": {
-   "sha512": "2120b464b303c040316fe7bd7f7c480c2d1447c67299feae669b9f29c75e6c3a",
-   "size": 4237
+   "sha512": "75b5d46c7f2bcc3369fd1debbc558a0b4fbca45183dc95b097dc11d9f802e175",
+   "size": 8123
   },
   "js/all.js": {
-   "sha512": "9e7080fc22b1a1ab1a1b715e1a842c3566b8705b950947a4fd74fe79b30558e4",
-   "size": 10654
+   "sha512": "0bfa36e0b3a49c064a7d13e2d0095a9fc51436c9409d5c840968e5ee6946f830",
+   "size": 14212
   },
   "js/lib/ZeroFrame.coffee": {
    "sha512": "96a11e88429e2fa26c47f5d24bf52d030d506f1dfecb2a4e2c5e034cc5d07e31",
@@ -34,8 +42,8 @@
    "size": 248
   },
   "js/utils/Time.coffee": {
-   "sha512": "9cf900d99e200d70da56673d643f17f73d524912ecd6c518d4eb1bbc0c372ec0",
-   "size": 861
+   "sha512": "9fbb498bb32989018996ac0aaef14885fd8f99f406d197c7b0d8906cef078bc0",
+   "size": 857
   }
  },
  "ignore": "data/.*",
@@ -46,16 +54,16 @@
   }
  },
  "inner_path": "content.json",
- "modified": 1457284118.282836,
+ "modified": 1457289646.007745,
  "sign": [
-  108499898069202908412971738329219825445205409778571380321715357580251221529257,
-  61644468984217288409879143680469733130752579075554880646113916918848958088089
+  38286886242649303530162726922351568138652059797174958112907154547210874300629,
+  101199270834046316783965091098571702210002306603468999377279551256578801339919
  ],
- "signers_sign": "G4bSRWTp6R9RBhkBpeoYlx3gDUCv0CFVG5tVkfcMp6hb27G66ew+8UY2xMC0sXVrz1aF/SzLD6Pwk96d3VF77bM=",
+ "signers_sign": "HJLG8O0mDAYMH4c5SeCvGf7CYBCydDVezM21vnTWZlkn5MWr8jc78rIj6xWcRsoNywK1O2RetGE2YNWbVMPefYA=",
  "signs": {
-  "186dimSoq8cwswwaBNKptSgC8NikcB6YmK": "HOwDkPnqucDXnHNnYn3G7W2UraPrzQHAFJeVHFZYLptN16QgVsEnsFpB93mAfgTI+t4ESkMFzjkiHen2qqo7p5k="
+  "1CjR14fofbRJ54oj8A7rAfWpzpLawdP5uc": "HCoPn4s6aDEfxGCwuJDVHEBoUJPeudlg7dzOZQm8MptIg3XjxW00rKp29T5uVJtNmUfjn8FqFc2blwY6k1GjmVo="
  },
  "signs_required": 1,
- "title": "myZeroChat tutorial result",
+ "title": "mymyZeroChatIRC /me forked",
  "zeronet_version": "0.3.6"
 }

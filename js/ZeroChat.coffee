@@ -20,6 +20,18 @@ class ZeroChat extends ZeroFrame
             if message.params.event[0] == "file_done"
                 @loadMessages()
 
+    resetDebug: ->
+        document.getElementById("list").innerHTML = ""
+
+    debugMsg: (msg) ->
+        newElement = document.createElement('li')
+        newElement.innerHTML = msg
+        document.getElementById("list").appendChild(newElement)
+
+    resetInputField: =>
+        document.getElementById("message").disabled = false
+        document.getElementById("message").value = ""  # Reset the message input
+        document.getElementById("message").focus()
 
     sendMessage: =>
         if not Page.site_info.cert_user_id  # No account selected, display error
@@ -36,6 +48,12 @@ class ZeroChat extends ZeroFrame
             else  # Not exits yet, use default data
                 data = { "message": [] }
 
+            # // EMPTY MESSAGES
+            msg = document.getElementById("message").value
+            if msg == "" or msg == "/me" or msg == "/me "
+                @debugMsg('empty message')
+                @resetInputField()
+                return false
             # Add the message to data
             data.message.push({
                 "body": document.getElementById("message").value,
@@ -50,9 +68,7 @@ class ZeroChat extends ZeroFrame
                 if res == "ok"
                     # Publish the file to other users
                     @cmd "sitePublish", {"inner_path": inner_path}, (res) =>
-                        document.getElementById("message").disabled = false
-                        document.getElementById("message").value = ""  # Reset the message input
-                        document.getElementById("message").focus()
+                        @resetInputField()
                         @loadMessages()
                 else
                     @cmd "wrapperNotification", ["error", "File write error: #{res}"]
@@ -60,6 +76,36 @@ class ZeroChat extends ZeroFrame
 
         return false
 
+
+    replaceURLs: (body) ->
+        # // REGEXES
+        replacePattern0 = /(http:\/\/127.0.0.1:43110\/)/gi
+        replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim
+        replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim
+        replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim
+        replacePattern4 = /0net:\/\/([-a-zA-Z0-9+&.,:+_\/=?]*)/g
+        replacePattern5 = /(([a-zA-Z0-9\-\_\.])+)\/\/0mail/gim;
+        
+        # // url rewriting 127.0.0.1:43110 to 0net:// so other replacements don't break
+        replacedText = body.replace(replacePattern0, '0net://')
+        replacedText = replacedText.replace('@zeroid.bit', '//0mail')
+
+        # // URLs starting with http://, https://, or ftp://
+        replacedText = replacedText.replace(replacePattern1, '<a href="$1" target="_blank" style="color: red; font-weight: bold;">$1</a>');
+
+        # // URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+        replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank" style="color: red; font-weight: bold;">$2</a>')
+
+        # // Change email addresses to mailto:: links.
+        replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1" style="color: red; font-weight: bold;">$1</a>')
+
+        # // replace 0net:// URL href back to http://127.0.0.1:43110
+        replacedText = replacedText.replace(replacePattern4, '<a href="http://127.0.0.1:43110/$1" target="_blank" style="color: green; font-weight: bold;">0net://$1</a>')
+
+        # // rewrite link href and replace //0mail with @zeroid.bit
+        replacedText = replacedText.replace(replacePattern5, '<a href="http://127.0.0.1:43110/Mail.ZeroNetwork.bit/?to=$1" target="_blank" style="color: green; font-weight: bold;">$1@zeroid.bit</a>')
+
+        return replacedText
 
     loadMessages: ->
         query = """
@@ -74,10 +120,45 @@ class ZeroChat extends ZeroFrame
         @cmd "dbQuery", [query], (messages) =>
             document.getElementById("messages").innerHTML = ""  # Always start with empty messages
             message_lines = []
+
+            # // remove later
+            @resetDebug()
+
             for message in messages
                 body = message.body.replace(/</g, "&lt;").replace(/>/g, "&gt;")  # Escape html tags in body
                 added = new Date(message.date_added)
-                message_lines.push "<li><small title='#{added}'>#{Time.since(message.date_added/1000)}</small> <b style='color: #{Text.toColor(message.cert_user_id)}'>#{message.cert_user_id.replace('@zeroid.bit', '')}</b>: #{body}</li>"
+
+                # // OUR ADDITIONS
+                time = Time.since(message.date_added / 1000)
+                userid = message.cert_user_id
+                useridcolor = Text.toColor(userid)
+                username = message.cert_user_id.replace('@zeroid.bit', '')
+                msgseparator = ":"
+
+                # // REPLACE URLS
+                body = @replaceURLs(body)
+
+                # // REPLACE IRC
+                if body.substr(0,3) == "/me"
+                    action = body.replace("/me","")
+                    username = username+' '+action
+                    body = ''
+                    msgseparator = ''
+
+                # // STYLE OUR MESSAGES AND MENTIONS
+                prestyle=""
+                poststyle=""
+                # our messages
+                if userid == Page.site_info.cert_user_id
+                    prestyle = '<span style="color:black; font-weight:bold;">'
+                    poststyle = '</span>'
+                # our mentions
+                if Page.site_info.cert_user_id and body.indexOf(Page.site_info.cert_user_id.replace('@zeroid.bit', '')) > -1
+                    prestyle = '<span style="color:blue; font-weight:bold;">'
+                    poststyle = '</span>'
+                body = prestyle + body + poststyle
+
+                message_lines.push "<li><small title='#{added}'>#{time}</small> <b style='color: #{useridcolor}'>#{username}</b>#{msgseparator} #{body}</li>"
             message_lines.reverse()
             document.getElementById("messages").innerHTML = message_lines.join("\n")
 
@@ -90,6 +171,9 @@ class ZeroChat extends ZeroFrame
     # Wrapper websocket connection ready
     onOpenWebsocket: (e) =>
         @cmd "siteInfo", {}, (site_info) =>
+            document.getElementById("bigTitle").innerHTML = site_info.content.title + ' - ' + site_info.content.description
+            document.getElementById("peerCount").innerHTML = site_info.peers + ' Visitors'
+
             # Update currently selected username
             if site_info.cert_user_id
                 document.getElementById("select_user").innerHTML = site_info.cert_user_id
