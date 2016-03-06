@@ -1,0 +1,24 @@
+{
+	"db_name": "ZeroChat",
+	"db_file": "data/zerochat.db",
+	"version": 2,
+	"maps": {
+		"users/.+/data.json": {
+			"to_table": [ "message" ]
+		},
+		"users/.+/content.json": {
+			"to_keyvalue": [ "cert_user_id" ]
+		}
+	},
+	"tables": {
+		"message": {
+			"cols": [
+				["body", "TEXT"],
+				["date_added", "INTEGER"],
+				["json_id", "INTEGER REFERENCES json (json_id)"]
+			],
+			"indexes": ["CREATE UNIQUE INDEX message_key ON message(json_id, date_added)"],
+			"schema_changed": 1
+		}
+	}
+}
