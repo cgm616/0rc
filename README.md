@@ -28,7 +28,6 @@ GITHUB
 - commit the original nofish code as a base from 'ZeroChat-nofish-original.tar.gz'
 - then commit the forked code, so comparisons are easy to do, especially if the zerochat base changes
 - or convince nofish to make a ZeroChat repo along with the others https://github.com/HelloZeroNet?tab=repositories
-- turn this file into a README.md
 
 NOTE
 there's a hidden div called '#rhs' that is currently set to 'display: none',
