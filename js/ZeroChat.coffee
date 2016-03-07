@@ -85,7 +85,7 @@ class ZeroChat extends ZeroFrame
         replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim
         replacePattern4 = /0net:\/\/([-a-zA-Z0-9+&.,:+_\/=?]*)/g
         replacePattern5 = /(([a-zA-Z0-9\-\_\.])+)\/\/0mail/gim;
-        
+
         # // url rewriting 127.0.0.1:43110 to 0net:// so other replacements don't break
         replacedText = body.replace(replacePattern0, '0net://')
         replacedText = replacedText.replace('@zeroid.bit', '//0mail')
@@ -147,15 +147,13 @@ class ZeroChat extends ZeroFrame
 
                 # // STYLE OUR MESSAGES AND MENTIONS
                 prestyle=""
-                poststyle=""
+                poststyle = '</span>'
                 # our messages
                 if userid == Page.site_info.cert_user_id
                     prestyle = '<span style="color:black; font-weight:bold;">'
-                    poststyle = '</span>'
                 # our mentions
                 if Page.site_info.cert_user_id and body.indexOf(Page.site_info.cert_user_id.replace('@zeroid.bit', '')) > -1
                     prestyle = '<span style="color:blue; font-weight:bold;">'
-                    poststyle = '</span>'
                 body = prestyle + body + poststyle
 
                 message_lines.push "<li><small title='#{added}'>#{time}</small> <b style='color: #{useridcolor}'>#{username}</b>#{msgseparator} #{body}</li>"
