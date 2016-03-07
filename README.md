@@ -7,7 +7,7 @@ CONTRIBUTORS
 - meow@zeroid.bit
 - cgm616@zeroid.bit
 - hhes@zeroid.bit
-- thoth@zeroid.bit
+- whowaswho@zeroid.bit
 
 SEEKING NEW CONTRIBUTORS
 
