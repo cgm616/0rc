@@ -5,6 +5,9 @@ ZEROCHAT "IRC" v0.55
 CONTRIBUTORS
 - nofish@zeroid.bit (origin)
 - meow@zeroid.bit
+- cgm616@zeroid.bit
+- hhes@zeroid.bit
+- thoth@zeroid.bit
 
 SEEKING NEW CONTRIBUTORS
 
@@ -22,12 +25,6 @@ CURRENT FEATURES
 ---------------------------------------------
 
 TODO
-
-GITHUB
-- call the repo 'ZeroChatIRC'
-- commit the original nofish code as a base from 'ZeroChat-nofish-original.tar.gz'
-- then commit the forked code, so comparisons are easy to do, especially if the zerochat base changes
-- or convince nofish to make a ZeroChat repo along with the others https://github.com/HelloZeroNet?tab=repositories
 
 NOTE
 there's a hidden div called '#rhs' that is currently set to 'display: none',
