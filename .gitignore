@@ -4,3 +4,6 @@
 
 # Data dir
 data/*
+
+# ZeroNet content list
+content.json
