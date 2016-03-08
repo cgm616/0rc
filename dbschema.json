@@ -13,6 +13,8 @@
 	"tables": {
 		"message": {
 			"cols": [
+				["room", "TEXT"],
+				["type", "TEXT"],
 				["body", "TEXT"],
 				["date_added", "INTEGER"],
 				["json_id", "INTEGER REFERENCES json (json_id)"]
