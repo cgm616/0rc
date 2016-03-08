@@ -68,7 +68,7 @@ At this point, you should be all done. All that's left is to [sign and publish](
 
 License for 0rc
 -------------
-Due to the unique nature of ZeroNet and how it so tightly couples sharing site source code, and due to how this codebase evolved from the work of both nofish and meow, we chose to use the Unlicense for our work. Any contributions after tag v0.55 are under this license.
+Due to the unique nature of ZeroNet and how it so tightly couples sharing site source code, and due to how this codebase evolved from the work of both nofish and meow, we chose to use the Unlicense for our work. Any contributions after commit cd03ba9 are under this license.
 
 The complete license can be found in the file `UNLICENSE` at the root of the repository.
 
