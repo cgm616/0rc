@@ -1,0 +1,6 @@
+# Hidden files
+.*
+!/.gitignore
+
+# Data dir
+data/*
