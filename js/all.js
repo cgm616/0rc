@@ -329,7 +329,7 @@
       replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
       replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
       replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
-      replacePattern4 = /0net:\/\/([-a-zA-Z0-9+&.,:_+\/=?]*)/g;
+      replacePattern4 = /0net:\/\/([-a-zA-Z0-9+&@#+\/%?=~_|!:,.;]*)/g;
       replacePattern5 = /(([a-zA-Z0-9\-\_\.])+)\/\/0mail/gim;
 
       replacedText = body.replace(replacePattern0, '0net://');
