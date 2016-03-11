@@ -7,6 +7,11 @@ An IRC-like internet chatroom hosted on [ZeroNet](https://github.com/hellozerone
 ----------
 
 
+Development Heading Forward
+------------
+In the issues of this repository are a list of things we plan to get done. Any help on them would be greatly appreciated.
+
+
 Installing / Hosting 0rc
 -------------
 In order to start hosting 0rc, you must install ZeroNet. Instructions for doing that are available on its repository. However, once hosting the site once and getting enough peers, the site should forever be available through ZeroNet regardless of whether or not your node is running.
