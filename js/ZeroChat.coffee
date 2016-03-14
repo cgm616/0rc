@@ -79,19 +79,19 @@ class ZeroChat extends ZeroFrame
 
     replaceURLs: (body) ->
         # // REGEXES
-        replacePattern0 = /(http:\/\/127.0.0.1:43110\/)/gi
+        replacePattern0 = /(https?:\/\/(127.0.0.1|localhost):43110\/)/gi
         replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim
         replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim
         replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim
         replacePattern4 = /0net:\/\/([-a-zA-Z0-9+&.,:+_\/=?]*)/g
-        replacePattern5 = /(([a-zA-Z0-9\-\_\.])+)\/\/0mail/gim;
+        replacePattern5 = /(([a-zA-Z0-9\-\_\.])+)\/\/0mail/gim
 
-        # // url rewriting 127.0.0.1:43110 to 0net:// so other replacements don't break
+        # // url rewriting 127.0.0.1:43110 to 0net:// so other replacements don't break and localhost:43110 to 0net:// so they aren't scheme://ip:port dependent
         replacedText = body.replace(replacePattern0, '0net://')
         replacedText = replacedText.replace('@zeroid.bit', '//0mail')
 
         # // URLs starting with http://, https://, or ftp://
-        replacedText = replacedText.replace(replacePattern1, '<a href="$1" target="_blank" style="color: red; font-weight: bold;">$1</a>');
+        replacedText = replacedText.replace(replacePattern1, '<a href="$1" target="_blank" style="color: red; font-weight: bold;">$1</a>')
 
         # // URLs starting with "www." (without // before it, or it'd re-link the ones done above).
         replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank" style="color: red; font-weight: bold;">$2</a>')
@@ -99,10 +99,10 @@ class ZeroChat extends ZeroFrame
         # // Change email addresses to mailto:: links.
         replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1" style="color: red; font-weight: bold;">$1</a>')
 
-        # // replace 0net:// URL href back to http://127.0.0.1:43110
+        # // remove 0net:// prefix in URL href
         replacedText = replacedText.replace(replacePattern4, '<a href="/$1" target="_blank" style="color: green; font-weight: bold;">0net://$1</a>')
 
-        # // rewrite link href and replace //0mail with @zeroid.bit
+        # // rewrite 0net:// prefix in URL href and replace //0mail with @zeroid.bit
         replacedText = replacedText.replace(replacePattern5, '<a href="/Mail.ZeroNetwork.bit/?to=$1" target="_blank" style="color: green; font-weight: bold;">$1@zeroid.bit</a>')
 
         return replacedText
@@ -139,7 +139,7 @@ class ZeroChat extends ZeroFrame
                 body = @replaceURLs(body)
 
                 # // REPLACE IRC
-                if body.substr(0,3) == "/me"
+                if body.substr(0, 3) == "/me"
                     action = body.replace("/me","")
                     username = username+' '+action
                     body = ''
