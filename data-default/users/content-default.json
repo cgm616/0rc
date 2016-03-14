@@ -12,13 +12,13 @@
     "permission_rules": {
       ".*": {
         "files_allowed": "data.json", 
-        "max_size": 10000
+        "max_size": 100000
       }, 
-      "bitmsg/.*@zeroid.bit": { "max_size": 15000 }
+      "bitmsg/.*@zeroid.bit": { "max_size": 100000 }
     }, 
     "permissions": {
       "bad@zeroid.bit": false, 
-      "nofish@zeroid.bit": { "max_size": 100000 }
+      "cgm616@zeroid.bit": { "max_size": 100000 }
     }
   }
 }
