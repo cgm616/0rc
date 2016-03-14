@@ -100,10 +100,10 @@ class ZeroChat extends ZeroFrame
         replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1" style="color: red; font-weight: bold;">$1</a>')
 
         # // replace 0net:// URL href back to http://127.0.0.1:43110
-        replacedText = replacedText.replace(replacePattern4, '<a href="http://127.0.0.1:43110/$1" target="_blank" style="color: green; font-weight: bold;">0net://$1</a>')
+        replacedText = replacedText.replace(replacePattern4, '<a href="/$1" target="_blank" style="color: green; font-weight: bold;">0net://$1</a>')
 
         # // rewrite link href and replace //0mail with @zeroid.bit
-        replacedText = replacedText.replace(replacePattern5, '<a href="http://127.0.0.1:43110/Mail.ZeroNetwork.bit/?to=$1" target="_blank" style="color: green; font-weight: bold;">$1@zeroid.bit</a>')
+        replacedText = replacedText.replace(replacePattern5, '<a href="/Mail.ZeroNetwork.bit/?to=$1" target="_blank" style="color: green; font-weight: bold;">$1@zeroid.bit</a>')
 
         return replacedText
 
